@@ -64,7 +64,9 @@ Step-by-Step Account Creation
 For additional Help:
 
 * AWS Account Set-Up Guide
+     https://docs.aws.amazon.com/accounts/latest/reference/getting-started.html
 * YouTube Tutorial
+     https://www.youtube.com/watch?v=lIdh92JmWtg
 
 Part 2: Security and IAM Role Set-Up
 
