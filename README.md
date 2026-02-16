@@ -1,6 +1,6 @@
 # AWS-Account-Creation-for-Leo
 
-Part 1: Creating Your AWS Account
+Part 1: Creating Your AWS Account. If you already have an AWS account, please skip to Part 2. 
 
 Prerequisites
 
