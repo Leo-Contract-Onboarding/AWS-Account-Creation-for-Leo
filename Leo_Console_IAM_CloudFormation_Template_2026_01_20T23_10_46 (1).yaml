@@ -1,0 +1,254 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create IAM users with console access, groups, and policies for Leo Console access
+
+Parameters:
+  JohnSmithPassword:
+    Type: String
+    NoEcho: true
+    Description: Console password for JohnSmith user
+    MinLength: 8
+    MaxLength: 128
+  JaneDoePassword:
+    Type: String
+    NoEcho: true
+    Description: Console password for JaneDoe user
+    MinLength: 8
+    MaxLength: 128
+
+Resources:
+  LeoAdministratorPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: LeoAdministratorPolicy
+      Description: Policy granting full Leo Administrator access to all Leo Console APIs using wildcards
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'cloudwatch:*'
+              - 'ec2:*'
+              - 'kdrms:*'
+              - 'ksa:*'
+              - 'kuiper:*'
+              - 'kuipercommerce:*'
+              - 'kuiperconnection:*'
+              - 'kuipersupport:*'
+              - 'location:*'
+              - 'support:*'
+            Resource: '*'
+
+  NetworkEngineerPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: NetworkEngineerPolicy
+      Description: Policy granting Network Engineer access to selected Leo Console APIs
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'cloudwatch:GetMetricData'
+              - 'ec2:DescribeAvailabilityZones'
+              - 'ec2:DescribeTransitGateways'
+              - 'kdrms:ListTagsForResource'
+              - 'kdrms:TagsResource'
+              - 'kdrms:UntagResource'
+              - 'kuiperconnection:CreateConnection'
+              - 'kuiperconnection:DeleteConnection'
+              - 'kuiperconnection:GetConnection'
+              - 'kuiperconnection:GetDelegation'
+              - 'kuiperconnection:ListConnections'
+              - 'kuiperconnection:StartDelegation'
+              - 'kdrms:GetTerminalInstance'
+              - 'kdrms:GetTerminalInstanceJob'
+              - 'kdrms:GetTerminalInstanceLocation'
+              - 'kdrms:GetTerminalTransfer'
+              - 'kdrms:ListTerminalInstanceJobs'
+              - 'kdrms:ListTerminalInstances'
+              - 'kdrms:ListTerminalTransfers'
+              - 'kdrms:StartTerminalInstanceJob'
+              - 'kdrms:StartTerminalInstanceTransfer'
+              - 'kdrms:UpdateTerminalInstanceLocalPassword'
+              - 'kuipersupport:AddAttachmentsToSet'
+              - 'kuipersupport:AddCommunicationToCase'
+              - 'kuipersupport:CreateCase'
+              - 'kuipersupport:DescribeAttachment'
+              - 'kuipersupport:DescribeCaseAttributes'
+              - 'kuipersupport:DescribeCases'
+              - 'kuipersupport:DescribeCommunications'
+              - 'kuipersupport:DescribeCreateCaseOptions'
+              - 'kuipersupport:DescribeIssueTypes'
+              - 'kuipersupport:DescribeServices'
+              - 'kuipersupport:DescribeSeverityLevels'
+              - 'kuipersupport:DescribeSupportedLanguages'
+              - 'kuipersupport:DescribeSupportLevel'
+              - 'kuipersupport:InitiateCallForCase'
+              - 'kuipersupport:RateCaseCommunication'
+              - 'kuipersupport:ResolveCase'
+              - 'kuipersupport:SearchForCases'
+              - 'support:CreateCase'
+              - 'support:DescribeAttachment'
+              - 'support:DescribeCaseAttributes'
+              - 'support:DescribeCases'
+              - 'support:DescribeCommunications'
+              - 'support:DescribeCreateCaseOptions'
+              - 'support:DescribeIssueTypes'
+              - 'support:DescribeServices'
+              - 'support:DescribeSeverityLevels'
+              - 'support:DescribeSupportedLanguages'
+              - 'support:DescribeSupportLevel'
+              - 'support:InitiateCallForCase'
+              - 'support:InitiateChatForCase'
+              - 'support:PutCaseAttributes'
+              - 'support:RateCaseCommunication'
+              - 'support:ResolveCase'
+              - 'support:SearchForCase'
+              - 'kuiper:AssociateGateway'
+              - 'kuiper:AssociateNetworkCidr'
+              - 'kuiper:AssociateSubnetCidr'
+              - 'kuiper:CreateDhcpOptionSet'
+              - 'kuiper:CreateNetwork'
+              - 'kuiper:CreateSubnet'
+              - 'kuiper:CreateVirtualNetworkInterface'
+              - 'kuiper:DeleteDhcpOptionSet'
+              - 'kuiper:DeleteNetwork'
+              - 'kuiper:DeleteSubnet'
+              - 'kuiper:DeleteVirtualNetworkInterface'
+              - 'kuiper:DisassociateGateway'
+              - 'kuiper:DisassociateNetworkCidr'
+              - 'kuiper:DisassociateSubnetCidr'
+              - 'kuiper:GetDhcpOptionSet'
+              - 'kuiper:GetGatewayAssociation'
+              - 'kuiper:GetNetwork'
+              - 'kuiper:GetNetworkCidrAssociation'
+              - 'kuiper:GetSubnet'
+              - 'kuiper:GetSubnetCidrAssociation'
+              - 'kuiper:GetVirtualNetworkInterface'
+              - 'kuiper:ListDhcpOptionSets'
+              - 'kuiper:ListGatewayAssociations'
+              - 'kuiper:ListLocations'
+              - 'kuiper:ListNetworkCidrAssociations'
+              - 'kuiper:ListNetworks'
+              - 'kuiper:ListSubnetCidrAssociations'
+              - 'kuiper:ListSubnets'
+              - 'kuiper:ListVirtualNetworkInterfaces'
+              - 'kuiper:StartVirtualNetworkInterface'
+              - 'kuiper:StopVirtualNetworkInterface'
+              - 'ksa:GetServiceAlert'
+              - 'ksa:ListServiceAlerts'
+              - 'ksa:ListServiceAlertHistory'
+              - 'ksa:ListImpactedResources'
+              - 'location:GetPlace'
+              - 'location:SearchPlaceIndexForSuggestions'
+              - 'location:SearchPlaceIndexForText'
+              - 'kuipercommerce:CheckProductOfferingAvailability'
+              - 'kuipercommerce:GetAccountPreferences'
+              - 'kuipercommerce:GetAddress'
+              - 'kuipercommerce:GetAddressByType'
+              - 'kuipercommerce:GetBillingDocumentForFixup'
+              - 'kuipercommerce:GetBillingPreference'
+              - 'kuipercommerce:GetContactByType'
+              - 'kuipercommerce:GetCurrentDataUsageCycle'
+              - 'kuipercommerce:GetDocument'
+              - 'kuipercommerce:GetDocumentUrl'
+              - 'kuipercommerce:GetFee'
+              - 'kuipercommerce:GetInvoiceDocument'
+              - 'kuipercommerce:GetLatestEstimatedBill'
+              - 'kuipercommerce:GetNutritionLabel'
+              - 'kuipercommerce:GetPaymentEnrollment'
+              - 'kuipercommerce:GetPaymentRequest'
+              - 'kuipercommerce:GetProduct'
+              - 'kuipercommerce:GetProductOffering'
+              - 'kuipercommerce:GetProductOrder'
+              - 'kuipercommerce:GetProductOrderForFixup'
+              - 'kuipercommerce:GetProfile'
+              - 'kuipercommerce:GetPurchaseOrderID'
+              - 'kuipercommerce:GetServiceContract'
+              - 'kuipercommerce:GetServicePromise'
+              - 'kuipercommerce:GetStatement'
+              - 'kuipercommerce:GetStatementDocument'
+              - 'kuipercommerce:GetStatementPreferences'
+              - 'kuipercommerce:GetTaxExemption'
+              - 'kuipercommerce:GetTaxRegistration'
+              - 'kuipercommerce:GetUsageInfo'
+              - 'kuipercommerce:ListAccountCredits'
+              - 'kuipercommerce:ListAddresses'
+              - 'kuipercommerce:ListBalanceImpacts'
+              - 'kuipercommerce:ListFees'
+              - 'kuipercommerce:ListLineItems'
+              - 'kuipercommerce:ListPaymentRequests'
+              - 'kuipercommerce:ListProductOrders'
+              - 'kuipercommerce:ListProducts'
+              - 'kuipercommerce:ListProfiles'
+              - 'kuipercommerce:ListReturnDocumentsForProductOrder'
+              - 'kuipercommerce:ListReturnEligibilitiesForProductOrder'
+              - 'kuipercommerce:ListReturns'
+              - 'kuipercommerce:ListServiceContracts'
+              - 'kuipercommerce:ListServiceContractsForProductOrder'
+              - 'kuipercommerce:ListServicePromises'
+              - 'kuipercommerce:ListShipmentsForProductOrder'
+              - 'kuipercommerce:ListStatements'
+              - 'kuipercommerce:ListTagsForResource'
+              - 'kuipercommerce:ListTaxExemptions'
+              - 'kuipercommerce:ListTaxRegistrations'
+              - 'kuipercommerce:ListTerminalInstancesForProductOrder'
+              - 'kuipercommerce:StartReturn'
+            Resource: '*'
+
+  LeoAdministratorGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: LeoAdministrator
+      ManagedPolicyArns:
+        - !Ref LeoAdministratorPolicy
+
+  NetworkEngineerGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: NetworkEngineer
+      ManagedPolicyArns:
+        - !Ref NetworkEngineerPolicy
+
+  JohnSmithUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: JohnSmith
+      Groups:
+        - !Ref LeoAdministratorGroup
+      LoginProfile:
+        Password: !Ref JohnSmithPassword
+        PasswordResetRequired: true
+
+  JaneDoeUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: JaneDoe
+      Groups:
+        - !Ref NetworkEngineerGroup
+      LoginProfile:
+        Password: !Ref JaneDoePassword
+        PasswordResetRequired: true
+
+Outputs:
+  LeoAdministratorGroupArn:
+    Description: ARN of the Leo Administrator group
+    Value: !GetAtt LeoAdministratorGroup.Arn
+  
+  NetworkEngineerGroupArn:
+    Description: ARN of the Network Engineer group
+    Value: !GetAtt NetworkEngineerGroup.Arn
+  
+  JohnSmithUserArn:
+    Description: ARN of user JohnSmith
+    Value: !GetAtt JohnSmithUser.Arn
+  
+  JaneDoeUserArn:
+    Description: ARN of user JaneDoe
+    Value: !GetAtt JaneDoeUser.Arn
+  
+  ConsoleLoginURL:
+    Description: AWS Console login URL
+    Value: !Sub 'https://${AWS::AccountId}.signin.aws.amazon.com/console'
+
