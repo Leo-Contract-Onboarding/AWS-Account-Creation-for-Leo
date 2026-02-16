@@ -190,7 +190,6 @@ To Update Resources:
 4. Upload a new template or modify parameters
 
 
-
 # AWS Account Security Best Practices
 
 1. Secure Your Root User Account
