@@ -63,12 +63,10 @@ Step-by-Step Account Creation
 
 For additional Help:
 
-* AWS Account Set-Up Guide
-     https://docs.aws.amazon.com/accounts/latest/reference/getting-started.html
-* YouTube Tutorial
-     https://www.youtube.com/watch?v=lIdh92JmWtg
+* AWS Account Set-Up Guide: https://docs.aws.amazon.com/accounts/latest/reference/getting-started.html
+* YouTube Tutorial: https://www.youtube.com/watch?v=lIdh92JmWtg
 
-Part 2: Security and IAM Role Set-Up
+# Part 2: Security and IAM Role Set-Up
 
 Amazon Leo has created a Cloud Formation Template that can be added to your AWS account. Running this template will not only help secure your account, but also give Amazon Leo the necessary access to assist with future inquiries.  
 
