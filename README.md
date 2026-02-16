@@ -78,7 +78,7 @@ What You'll Need Before Starting
 
 Step 1: Save the Template File
 
-1. Download the template I provided to your computer
+1. Download the template above (.YAML file)
 2. Remember where you saved it (like your Downloads folder or Desktop)
 3. Note the file name (for example: aws-setup-template.yaml)
 
